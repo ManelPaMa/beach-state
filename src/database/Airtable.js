@@ -4,7 +4,7 @@ class AirtableConnection {
 
 //Token api Airtable
 base() {
-   return new Airtable({apiKey: ''}).base('appSK9OCaWuHpaV42');
+   return new Airtable({apiKey: ''}).base('');
 }
 
 // Get info from the table
