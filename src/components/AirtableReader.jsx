@@ -6,6 +6,7 @@ import { AiOutlineUser } from "react-icons/ai";
 
 function AirtableReader() {
 
+  // defalut messages
   const message1 =     
   <p>
     Do you want to see beaches states in Maresme? Write <strong>'yes'</strong> to see the full list or write a <strong>city</strong> or <strong>flag colour</strong> to filter the data:
@@ -53,11 +54,12 @@ function AirtableReader() {
       setUserInput("");
       return;
     }
-
+  // Yes = show all beavhes - No = no show anithing
   if (userInput.toLowerCase() === 'yes' || userInput.toLowerCase() === 'no') {
       try {
         const base = airtableConnection.base()
-        const data = await airtableConnection.getBeaches(base);
+        const dataJSON = await airtableConnection.getBeaches(base);
+        const data = JSON.parse(dataJSON);
         console.log(data)
 
         const itemsText = data.map((item) => (
@@ -96,7 +98,7 @@ function AirtableReader() {
       ]);
       }
     } else if (filteredData) {
-      // Filter the information by country or agency
+      // Filter the information by city or flag
       const filteredItems = filteredData.filter((item) =>
       Object.values(item).some(
       (value) =>
@@ -191,7 +193,8 @@ function AirtableReader() {
     const fetchFilteredData = async () => {
       try {
         const base = airtableConnection.base()
-        const data = await airtableConnection.getBeaches(base);
+        const dataJSON = await airtableConnection.getBeaches(base);
+        const data = JSON.parse(dataJSON);
         setFilteredData(data);
       } catch (error) {
         setConversation((prevConversation) => [

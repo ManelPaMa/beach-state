@@ -4,7 +4,7 @@ class AirtableConnection {
 
 //Token api Airtable
 base() {
-   return new Airtable({apiKey: 'keyPY6L84ZOqihHyu'}).base('appSK9OCaWuHpaV42');
+   return new Airtable({apiKey:'keyPY6L84ZOqihHyu'}).base('appSK9OCaWuHpaV42');
 }
 
 // Get info from the table
@@ -21,7 +21,7 @@ async getBeaches(base){
         };
         data.push(beach);
     });
-    return data;
+    return JSON.stringify(data);
     } catch (e){
         console.error('Error form get info from Airtable');
     }
@@ -31,3 +31,4 @@ async getBeaches(base){
 
 
 export default AirtableConnection;
+
